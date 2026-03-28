@@ -1,207 +1,66 @@
 # Analysis and Complexity of Algorithms - UFPB
 
 [![Language](https://img.shields.io/badge/Language-C++-blue.svg)](https://isocpp.org/)
-[![Standard](https://img.shields.io/badge/C++-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B11)
 [![University](https://img.shields.io/badge/University-UFPB-green.svg)](https://www.ufpb.br/)
 
-Repository for the **Analysis and Design of Algorithms** course at the Federal University of Paraíba (UFPB), Period 5 - 2025.2.
+This repository contains the implementation, testing, and performance analysis of various algorithms studied in the **Analysis and Design of Algorithms** course at the Federal University of Paraíba (UFPB).
 
-## 📋 Overview
+The objective of this project is to explore fundamental concepts of algorithm complexity through empirical analysis and theoretical comparisons.
 
-This repository contains implementations and performance analysis of fundamental algorithms studied in the Analysis and Design of Algorithms course. The focus is on understanding algorithm complexity, comparing different approaches, and analyzing performance under various scenarios.
+---
 
 ## 🗂️ Project Structure
 
-```
-AnalysisComplexityAlgorithms_UFPB/
-├── sorting_algorithms/
-│   ├── sort1.cpp          # Main implementation with all sorting algorithms
-│   ├── sort1.exe          # Compiled executable
-│   └── output.txt         # Sample test results
-└── README.md              # This file
-```
+The project is organized into subdirectories by algorithmic topic, each containing its own implementation and detailed analysis.
 
-## 🔧 Implemented Algorithms
+### 1. [Sorting Algorithms](./sorting_algorithms/)
+Implementations and comparisons of 4 fundamental sorting algorithms across various input scenarios:
+- **Algorithms**: Insertion Sort, Selection Sort, Quick Sort, and Merge Sort.
+- **Scenarios**: Random values, already sorted, reverse sorted, and frequent repetitions.
+- **Analysis**: Focuses on comparing $O(n^2)$ vs. $O(n \log n)$ behaviors in practice.
 
-### Sorting Algorithms
+### 2. [Knapsack Problem](./knapsack_problem/)
+A detailed study of the **0-1 Knapsack Problem** (Part of APS3), comparing heuristic and optimal approaches:
+- **Algorithms**: Greedy Algorithm (V/W ratio), Recursive Brute Force, and Dynamic Programming (Bottom-Up).
+- **Scale**: Performance testing from $n=20$ up to $n=500,000$.
+- **Key Insight**: Demonstrates $O(2^n)$ vs. $O(n \times Q)$ complexity and the optimality of different approaches.
 
-The project currently implements and compares **4 fundamental sorting algorithms**:
+---
 
-| Algorithm | Time Complexity (Best) | Time Complexity (Average) | Time Complexity (Worst) | Space Complexity |
-|-----------|------------------------|---------------------------|-------------------------|------------------|
-| **Insertion Sort** | O(n) | O(n²) | O(n²) | O(1) |
-| **Selection Sort** | O(n²) | O(n²) | O(n²) | O(1) |
-| **Quick Sort** | O(n log n) | O(n log n) | O(n²) | O(log n) |
-| **Merge Sort** | O(n log n) | O(n log n) | O(n log n) | O(n) |
+## 🔧 Prerequisites
 
-#### Implementation Details
+- **C++ Compiler** with C++14 support (e.g., g++ 6.3.0 or higher).
+- **Windows**, Linux, or macOS environment.
 
-- **Insertion Sort**: Builds sorted array one element at a time
-- **Selection Sort**: Repeatedly finds minimum element and places it at the beginning
-- **Quick Sort**: Uses Hoare's partitioning scheme for divide-and-conquer
-- **Merge Sort**: Recursively divides and merges sorted subarrays
+## 🚀 General Setup
 
-## 🧪 Testing Framework
+To run any module, navigate to its directory and follow the compilation instructions in its specific `README.md`.
 
-The implementation includes a comprehensive testing framework that evaluates all algorithms across **4 different scenarios**:
-
-### Test Scenarios
-
-1. **Random Values (Uniform Distribution)**
-   - Random integers between 0-9999
-   - Tests average-case performance
-
-2. **Few Unique Values (High Repetition)**
-   - Only 5 unique values with high repetition
-   - Tests performance with many duplicates
-
-3. **Already Sorted (Best Case)**
-   - Ascending sequence: 1, 2, 3, ..., n
-   - Tests best-case performance
-
-4. **Reverse Sorted (Worst Case)**
-   - Descending sequence: n, n-1, n-2, ..., 1
-   - Tests worst-case performance
-
-### Performance Measurement
-
-Each test measures execution time in **microseconds** using C++ `<chrono>` library for high-precision timing.
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **C++ Compiler** with C++11 support (g++, clang++, MSVC)
-- **Windows**, Linux, or macOS
-
-### Compilation
-
+For example, to test the knapsack problem:
 ```bash
-# Navigate to sorting_algorithms directory
-cd sorting_algorithms
-
-# Compile with g++
-g++ -o sort1.exe sort1.cpp -std=c++11
-
-# On Linux/macOS
-g++ -o sort1 sort1.cpp -std=c++11
+cd knapsack_problem
+g++ -o knapsack.exe knapsack.cpp -std=c++14
+.\knapsack.exe
 ```
 
-### Running Tests
-
-```bash
-# Windows
-.\sort1.exe
-
-# Linux/macOS
-./sort1
-```
-
-### Sample Output
-
-```
-============================================================================
-SORTING ALGORITHMS PERFORMANCE COMPARISON
-============================================================================
-Testing 4 algorithms on 4 different scenarios
-Array size: 1000 elements
-============================================================================
-
-
-========== SCENARIO 1: RANDOM VALUES (UNIFORM DISTRIBUTION) ==========
-
-Insertion Sort - Random Values
-Array size: 1000 elements
-Execution time: 2543 microseconds
-
-Selection Sort - Random Values
-Array size: 1000 elements
-Execution time: 1876 microseconds
-
-Quick Sort - Random Values
-Array size: 1000 elements
-Execution time: 156 microseconds
-
-Merge Sort - Random Values
-Array size: 1000 elements
-Execution time: 234 microseconds
-
-...
-```
-
-## 📊 Customizing Tests
-
-### Changing Array Size
-
-Modify the `n` variable in `main()`:
-
-```cpp
-int n = 1000;  // Change to desired size (e.g., 5000, 10000)
-```
-
-### Testing Multiple Sizes
-
-Uncomment and use the `sizes[]` array for comprehensive testing:
-
-```cpp
-int sizes[] = {100, 500, 1000, 5000, 10000};
-// Add loop to iterate through all sizes
-```
-
-## 📚 Key Observations
-
-Based on the testing framework, you should observe:
-
-- **Insertion Sort**: 
-  - ⚡ Very fast on already sorted data
-  - 🐌 Very slow on reverse sorted data
-  
-- **Selection Sort**: 
-  - 📊 Consistent O(n²) performance regardless of input
-  
-- **Quick Sort**: 
-  - ⚡ Fast on random data
-  - ⚠️ May degrade to O(n²) on sorted/reversed data (depends on pivot selection)
-  
-- **Merge Sort**: 
-  - ✅ Consistent O(n log n) performance across all scenarios
-  - 💾 Requires additional memory for merging
+---
 
 ## 🎓 Learning Objectives
 
-This project helps understand:
+1. **Theoretical vs. Practical Complexity**: Understanding how asymptotic notation translates to real-world execution times.
+2. **Algorithm Selection**: Identifying the right algorithm for a specific problem and data size.
+3. **Optimality vs. Heuristics**: Recognizing trade-offs between guaranteed optimal results and computational speed.
+4. **Hardware Influence**: Evaluating how environment and resource limitations (memory/CPU) affect algorithm feasibility.
 
-1. **Algorithm Complexity Analysis**: Theoretical vs. practical performance
-2. **Best/Average/Worst Case Scenarios**: How input affects performance
-3. **Trade-offs**: Time complexity vs. space complexity
-4. **Empirical Analysis**: Measuring and comparing real execution times
-5. **Algorithm Selection**: Choosing the right algorithm for specific scenarios
-
-## 📝 Code Documentation
-
-All code is fully documented in English with:
-- Detailed function descriptions
-- Parameter explanations
-- Complexity analysis
-- Inline comments explaining logic
-
-## 🤝 Contributing
-
-This is an academic project for the Analysis and Design of Algorithms course at UFPB. Suggestions and improvements are welcome!
-
-## 📄 License
-
-This project is developed for educational purposes as part of the Computer Science curriculum at UFPB.
+---
 
 ## 👨‍🎓 Author
 
 **Gabriel**  
 Computer Science - Period 5  
-Federal University of Paraíba (UFPB)  
-2025.2
+Federal University of Paraíba (UFPB)
 
 ---
 
-**Course**: Analysis and Design of Algorithms  
-**Institution**: UFPB - Federal University of Paraíba  
-**Period**: 2025.2
+**Period**: 2025.2  
+**Institution**: UFPB - Federal University of Paraíba
